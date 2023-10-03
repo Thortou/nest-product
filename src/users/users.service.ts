@@ -38,6 +38,11 @@ export class UsersService {
         message: ['This user is already exist..']
       });
     }
+    if(createUser.Password !== createUser.confir_pass){
+      throw new UnauthorizedException({
+        messsage: 'confirm password wrong'
+      })
+    }
     return this.userRepository.save(users)
 
 

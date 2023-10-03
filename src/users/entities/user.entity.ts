@@ -1,4 +1,5 @@
 import { categories } from "src/categories/entities/category.entity";
+import { LocationEntity } from "src/location/entities/location.entity";
 import { Order } from "src/order/entities/order.entity";
 import { product } from "src/products/entities/product.entity";
 import { received } from "src/received/entities/received.entity";
@@ -7,32 +8,35 @@ import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, PrimaryGe
 
 @Entity()
 export class User {
-    @PrimaryGeneratedColumn()
-    UserId : number;
-    @Column()
-    UserName: string;
-    @Column()
-    Gmail: string;
-    @Column()
-    Tel : string;
-    @Column()
-    Password : string;
+  @PrimaryGeneratedColumn()
+  UserId: number;
+  @Column()
+  UserName: string;
+  @Column()
+  Gmail: string;
+  @Column()
+  Tel: string;
+  @Column()
+  Password: string;
 
-    @OneToMany(() => categories, Categories => Categories.user)
-    Categories: categories
+  @OneToMany(() => categories, Categories => Categories.user)
+  Categories: categories
 
-    @OneToMany(() => product, Product => Product.user)
-    Product: product
+  @OneToMany(() => product, Product => Product.user)
+  Product: product
 
-    @OneToMany(() => received, received => received.user)
-    @JoinColumn({name:'UserName'})
-    received: received
+  @OneToMany(() => received, received => received.user)
+  @JoinColumn({ name: 'UserName' })
+  received: received
 
-    @OneToMany(() => Order, order => order.user)
-    order: Order
+  @OneToMany(() => Order, order => order.user)
+  order: Order
 
-    @ManyToMany(() => role, roles => roles.user)
-    @JoinTable()
-    has: role[]
+  @OneToMany(() => LocationEntity, location => location.user)
+  Location: LocationEntity
+
+  @ManyToMany(() => role, roles => roles.user)
+  @JoinTable()
+  has: role[]
   users: role;
 }

@@ -19,4 +19,6 @@ export class CreateUserDto {
         message: "Your Password Minimum eight in length 6 or More..."
     })
     Password: string;
+    @IsNotEmpty()
+    confir_pass: string;
 }
